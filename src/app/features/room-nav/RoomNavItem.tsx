@@ -215,7 +215,7 @@ const RoomNavItemMenu = forwardRef<HTMLDivElement, RoomNavItemMenuProps>(
         </Box>
       </Menu>
     );
-  }
+  },
 );
 RoomNavItemMenu.displayName = 'RoomNavItemMenu';
 
@@ -243,7 +243,7 @@ export function RoomNavItem({
   const [menuAnchor, setMenuAnchor] = useState<RectCords>();
   const unread = useRoomUnread(room.roomId, roomToUnreadAtom);
   const typingMember = useRoomTypingMember(room.roomId).filter(
-    (receipt) => receipt.userId !== mx.getUserId()
+    (receipt) => receipt.userId !== mx.getUserId(),
   );
 
   const {
@@ -476,7 +476,7 @@ export function RoomNavItem({
           </NavItemOptions>
         )}
       </NavItem>
-      {room.isCallRoom() && (
+      {(room.isCallRoom() || callMemberships.length > 0) && (
         <Box direction="Column" style={{ paddingLeft: config.space.S200 }}>
           {callMemberships.map((callMembership) => (
             <RoomNavUser
